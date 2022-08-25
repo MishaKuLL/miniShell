@@ -11,6 +11,7 @@
 typedef struct s_data
 {
     char	cmd;
+    int     num;
 }	t_data;
 
 
