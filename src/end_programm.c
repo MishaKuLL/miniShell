@@ -32,7 +32,7 @@ void	error_msg(char *errmsg, int errnum)
 	exit(0);
 }
 
-void	free_data(t_data *data, char *errmsg, int errnum)
+void	free_data(t_struct *data, char *errmsg, int errnum)
 {
 	if (data->cmd!= NULL)
 		free(data->cmd);
