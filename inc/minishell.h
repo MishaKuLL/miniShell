@@ -65,7 +65,8 @@ typedef struct s_token
 	int		posic;
 }			t_token;
 
-void	initialize(t_struct *data);
+// void	initialize(t_struct *data); предлагаю по возможности делать статик функции, \
+									и объявлять их прямо в файле где они используются.
 void	print_prompt2(void);
 void	print_prompt1(void);
 void	free_data(t_struct *data, char *errmsg, int errnum);

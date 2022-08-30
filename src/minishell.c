@@ -1,5 +1,7 @@
 #include "../inc/minishell.h"
 
+static void	initialize(t_struct *data);
+
 int	main(void)
 {
 	t_struct	data;
@@ -58,13 +60,22 @@ char	*read_cmd(char *buf)
 	return (buf);
 }
 
- void	initialize(t_struct *data)
+static void	initialize(t_struct *data)
 {
-	data->last_redir = 0;
-	g_ret_number = 0;
+	data->has_flag = 0;
+	data->num_tokens = 0;
+	data->quote = NULL;
+	data->line = (char *) NULL;
+	data->line_read = (char *) NULL;
+	data->name_file = 0;
+	data->error_name_file = (char *) NULL;
+	data->home = (char *) NULL;
 	data->tokens = (char **) NULL;
-	
+	data->cmd = (char *) NULL;
+	data->last_redir = 0;
+	data->is_append = 0;
+	data->out_fd = 0;
+	data->in_fd = 0;
+	data->c = 0;
+	g_ret_number = 0;
 }
-
-
-
