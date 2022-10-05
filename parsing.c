@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-
 int	parsing(char *line, t_command *cmds)
 {
 	t_command	*tmp;
@@ -87,9 +86,10 @@ int	parse_command(t_command *cmd, char *line)
 	n = cmd->args_size - 1;
 	if (line[i] == '\\')
 		i++;
-	if (*cmd->args)
-		(cmd->args[n]) ? (j = ft_strlen(cmd->args[n])) : 0;
-	if ((next_arg = skip_spaces(line)) && line[i + next_arg])
+	if (*cmd->args && cmd->args[n])
+		j = ft_strlen(cmd->args[n]);
+	next_arg = skip_spaces(line);
+	if (next_arg && line[i + next_arg])
 	{
 		if (!ft_strchr("><;|", line[i + next_arg]) && (cmd->args[n]))
 		{
@@ -98,7 +98,8 @@ int	parse_command(t_command *cmd, char *line)
 		}
 		return (i + next_arg);
 	}
-	if (!(cmd->args[n] = ft_realloc(cmd->args[n], j + 1)))
+	cmd->args[n] = ft_realloc(cmd->args[n], j + 1);
+	if (!cmd->args)
 		error(ER_MALLOC);
 	cmd->args[n][j] = line[i];
 	return (i + 1);

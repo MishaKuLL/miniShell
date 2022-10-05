@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asherlin <asherlin@student.21-school.ru>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/05 19:01:54 by asherlin          #+#    #+#             */
+/*   Updated: 2022/10/05 20:13:21 by asherlin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
-int		ctrl_d(char *remainder)
+int	ctrl_d(char *remainder)
 {
 	if (remainder[0] == 0)
 	{
@@ -12,20 +24,21 @@ int		ctrl_d(char *remainder)
 	return (1);
 }
 
-int		cut_line(char **line, char **remainder)
+int	cut_line(char **line, char **remainder)
 {
 	int		i;
 
 	i = 0;
 	while ((*remainder)[i] != '\n')
 		i++;
-	if (!(*line = (char*)malloc(sizeof(char) * (i + 1))))
+	*line = (char *)malloc(sizeof(char) * (i + 1));
+	if (!(*line))
 		return (-1);
 	ft_strlcpy(*line, *remainder, i + 1);
 	return (0);
 }
 
-int		read_line(char **remainder, char **line)
+int	read_line(char **remainder, char **line)
 {
 	int		ret;
 	char	*buf;
@@ -33,14 +46,16 @@ int		read_line(char **remainder, char **line)
 	char	*tmp;
 
 	ret = 1;
-	if (!(buf = (char*)malloc(sizeof(char) * (BUFFER_SIZE + 1))))
+	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buf)
 		return (-1);
 	while (buf[0] != '\n' && ret != 0)
 	{
 		ret = read(0, buf, BUFFER_SIZE);
 		buf[ret] = '\0';
 		tmp = *remainder;
-		if (!(*remainder = ft_strjoin(*remainder, buf)))
+		*remainder = ft_strjoin(*remainder, buf);
+		if (!(*remainder))
 			return (-1);
 		free(tmp);
 		if (ret == 0)
@@ -51,7 +66,7 @@ int		read_line(char **remainder, char **line)
 	return (res);
 }
 
-int		get_next_line(char **line)
+int	get_next_line(char **line)
 {
 	int				out;
 	char			*remainder;
