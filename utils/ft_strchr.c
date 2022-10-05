@@ -1,16 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   README.md                                          :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asherlin <asherlin@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/18 21:33:55 by asherlin          #+#    #+#             */
-/*   Updated: 2022/10/04 18:42:05 by asherlin         ###   ########.fr       */
+/*   Created: 2022/10/03 20:26:38 by asherlin          #+#    #+#             */
+/*   Updated: 2022/10/04 21:48:59 by asherlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# miniShell
+#include "utils.h"
 
- (⌐■_■)
- 
+char	*ft_strchr(const char *s, int c)
+{
+	while (*s)
+	{
+		if (*s == (char)c)
+			return ((char*)s);
+		s++;
+	}
+	if ((char)c == '\0')
+		return ((char*)s);
+	return (NULL);
+}

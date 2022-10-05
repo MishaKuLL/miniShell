@@ -1,49 +1,36 @@
-NAME = 			minishell
-NAME_bonus = 	
+.PHONY: all clean fclean re 
 
-SRCS =			src/minishell.c \
+NAME = minishell
 
+SRC =	utils/ft_strdup.c utils/ft_strlen.c utils/ft_strjoin.c utils/ft_strlcpy.c utils/ft_strnstr.c \
+		utils/ft_strchr.c utils/ft_strncmp.c utils/ft_memcpy.c \
+		utils/ft_putstr_fd.c utils/ft_putchar_fd.c utils/ft_putendl_fd.c \
+		utils/ft_isalnum.c utils/ft_isalpha.c utils/ft_isdigit.c \
+		utils/ft_itoa.c utils/ft_atoi.c \
+		utils/ft_realloc.c utils/ft_double_realloc.c utils/ft_strtok.c utils/free_arr.c \
+		main.c get_next_line/get_next_line.c \
+		launch.c error.c list_cmd.c signals.c pipes.c redirects.c \
+		parsing.c parsing_env.c parsing_redirects.c parsing_quotes.c \
+		cmd_exit.c cmd_echo.c cmd_cd.c \
+		cmd_unset.c cmd_export.c cmd_pwd.c cmd_env.c 
 
-SRCS_bonus =
+SRCO = $(SRC:.c=.o)
 
-OBJS =			${SRCS:.c=.o}
-OBJS_bonus =	${SRCS_bonus:.c=.o}
+FLAGS = -Wall -Wextra -Werror
 
-CC 		=		gcc 
-RM 		=		rm -f
-FLAGS 	=		-Wall -Wextra -Werror
-HEAD	=		./inc/minishell.h 
-INC		=		-I ./libft
-LIB		=		-L ./libft -lft
-LFT		=		./libft/libft.a
+all: $(NAME)
 
-all:	${LFT} ${NAME}
+$(NAME): $(SRCO) 
+	@gcc $(SRCO) -o $(NAME) 
 
-${NAME}: ${OBJS}
-		${CC} -o ${NAME} $^ ${LIB}
-
-${LFT}: 
-		make -s -C libft
-
-bonus:	${LFT} ${NAME_bonus}
-
-${NAME_bonus}:	${OBJS_bonus}
-				${CC} -o ${NAME_bonus} $^ ${LIB}
-
-%.o:	%.c ${HEAD} Makefile
-		${CC} ${FLAGS} ${INC} -c $< -o $@
+%.o:%.c 
+	@gcc -g -c $< -o $@
 
 clean:
-		@make -s $@ -C libft
-		${RM} ${OBJS} ${OBJS_bonus}
-
+	@rm -f $(SRCO)
 
 fclean: clean
-		@make -s $@ -C libft
-		${RM} ${NAME} ${NAME_bonus}
+	@rm -f $(NAME)
 
 re: fclean all
 
-re_bonus: fclean bonus
-
-.PHONY: all clean fclean re bonus re_bonus
