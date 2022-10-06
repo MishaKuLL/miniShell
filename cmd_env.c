@@ -10,12 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "minishell.h"
 
 void	cmd_env(char **args)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (args[1])
@@ -26,10 +25,12 @@ void	cmd_env(char **args)
 		ft_putendl_fd(": No such file or directory", STDERR_FILENO);
 	}
 	else
+	{
 		while (g_env[i])
 		{
 			if (ft_strchr(g_env[i], '='))
 				ft_putendl_fd(g_env[i], 1);
 			i++;
 		}
+	}
 }

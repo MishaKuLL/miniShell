@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "minishell.h"
 
 static void	change_env(char *oldir, char *dir)
@@ -51,7 +50,7 @@ static char	*go_home(void)
 	return (NULL);
 }
 
-void		cmd_cd(char **args)
+void	cmd_cd(char **args)
 {
 	int			i;
 	struct stat	stats;

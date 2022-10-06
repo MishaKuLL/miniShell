@@ -10,17 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "minishell.h"
 
-static int		error_name(char *arg)
+static int	error_name(char *arg)
 {
 	int	j;
 
 	j = 0;
 	while (arg[j])
 	{
-		if (ft_isdigit(arg[0]) ||
+		if (ft_isdigit(arg[0]) || \
 			(!ft_isalpha(arg[j]) && !ft_isdigit(arg[j]) && arg[j] != '_'))
 		{
 			ft_putstr_fd("minishell: export: `", STDERR_FILENO);
@@ -33,7 +32,7 @@ static int		error_name(char *arg)
 	return (0);
 }
 
-static char		**change_env(char **env_data, int what_unset)
+static char	**change_env(char **env_data, int what_unset)
 {
 	char	**new;
 	int		i;
@@ -41,7 +40,7 @@ static char		**change_env(char **env_data, int what_unset)
 	i = 0;
 	while (env_data[i])
 		i++;
-	new = (char**)malloc(sizeof(char*) * (i + 1));
+	new = (char **)malloc(sizeof(char *) * (i + 1));
 	i = 0;
 	while (i < what_unset)
 	{
@@ -60,7 +59,7 @@ static char		**change_env(char **env_data, int what_unset)
 	return (new);
 }
 
-void			cmd_unset(char **args)
+void	cmd_unset(char **args)
 {
 	int		i;
 	int		j;

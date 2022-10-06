@@ -10,10 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "minishell.h"
 
-t_builtin		g_builtin[] =
+t_builtin		g_builtin[] = 
 {
 	{"echo", &cmd_echo},
 	{"cd", &cmd_cd},
@@ -74,11 +73,14 @@ void	find_cmd(char **args)
 		i++;
 	if (!g_env[i])
 		return ;
-	if (!(path = ft_strtok(g_env[i] + 5, ":")))
+	path = ft_strtok(g_env[i] + 5, ":");
+	if (!path)
 		error(ER_MALLOC);
 	i = -1;
 	while (path[++i])
-		if ((new = join_path(path[i], args[0])))
+	{
+		new = join_path(path[i], args[0]);
+		if (new)
 		{
 			tmp = args[0];
 			args[0] = new;
@@ -87,6 +89,7 @@ void	find_cmd(char **args)
 			execute_process(args);
 			return ;
 		}
+	}
 	free_arr(path);
 	error_no_cmd(args[0]);
 }
@@ -101,7 +104,7 @@ void	execute(char **args)
 		return (error_no_cmd(args[0]));
 	while (i < 7)
 	{
-		if (!(ft_strncmp(args[0], g_builtin[i].name,
+		if (!(ft_strncmp(args[0], g_builtin[i].name, \
 			ft_strlen(g_builtin[i].name))))
 		{
 			g_builtin[i].func(args);
@@ -109,7 +112,7 @@ void	execute(char **args)
 		}
 		i++;
 	}
-	if ((stat(args[0], &stats) == 0) &&
+	if ((stat(args[0], &stats) == 0) && \
 		(S_ISREG(stats.st_mode)) && (stats.st_mode & S_IXUSR))
 		execute_process(args);
 	else
@@ -121,7 +124,8 @@ void	execute_process(char **args)
 	pid_t	pid;
 	int		status;
 
-	if ((pid = fork()) < 0)
+	pid = fork();
+	if (pid < 0)
 		error(ER_FORK);
 	if (pid == 0)
 	{

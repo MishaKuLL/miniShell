@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "minishell.h"
 
 static char	**sort_env(char **env_data, int len)
@@ -20,7 +19,7 @@ static char	**sort_env(char **env_data, int len)
 	char	**new;
 	char	*tmp;
 
-	new = (char**)malloc(sizeof(char*) * (len + 1));
+	new = (char **)malloc(sizeof(char *) * (len + 1));
 	new[len] = NULL;
 	i = -1;
 	while (env_data[++i])
@@ -106,7 +105,7 @@ static int	error_name(char *arg)
 	j = 0;
 	while ((arg[j] && arg[j] != '=') || (arg[j] == '=' && j == 0))
 	{
-		if (ft_isdigit(arg[0]) ||
+		if (ft_isdigit(arg[0]) || \
 			(!ft_isalpha(arg[j]) && !ft_isdigit(arg[j]) && arg[j] != '_'))
 		{
 			ft_putstr_fd("minishell: export: `", STDERR_FILENO);
@@ -119,7 +118,7 @@ static int	error_name(char *arg)
 	return (0);
 }
 
-void		cmd_export(char **args)
+void	cmd_export(char **args)
 {
 	int		i;
 	int		j;

@@ -10,13 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "minishell.h"
 
 void	cmd_echo(char **args)
 {
-	int i;
-	int n_flag;
+	int	i;
+	int	n_flag;
 
 	n_flag = 0;
 	if (args[1])

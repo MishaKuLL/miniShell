@@ -10,10 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "minishell.h"
 
-int		parsing_env(char *line, t_command *cmd)
+int	parsing_env(char *line, t_command *cmd)
 {
 	int		i;
 	int		j;
