@@ -17,7 +17,7 @@ static char	*check(const char *big, const char *little, size_t size)
 	char	*start;
 	size_t	i;
 
-	start = (char*)big;
+	start = (char *)big;
 	i = 0;
 	while (*little)
 	{
@@ -30,19 +30,20 @@ static char	*check(const char *big, const char *little, size_t size)
 	return (start);
 }
 
-char		*ft_strnstr(const char *big, const char *little, size_t len)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
 	char	*start;
 	size_t	i;
 
 	if (!*little)
-		return ((char*)big);
+		return ((char *)big);
 	i = 0;
 	while (*big && i < len)
 	{
 		if (*big == *little)
 		{
-			if ((start = check(big, little, len - i)))
+			start = check(big, little, len - i);
+			if (start)
 				return (start);
 		}
 		big++;

@@ -14,15 +14,18 @@
 
 static size_t	ft_tensnum(int n)
 {
-	size_t i;
+	size_t	i;
 
 	i = 1;
-	while (n /= 10)
+	while (n)
+	{
 		i++;
+		n = n / 10;
+	}
 	return (i);
 }
 
-char			*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	char	*res;
 	size_t	minus;
@@ -34,7 +37,7 @@ char			*ft_itoa(int n)
 	des = 1;
 	minus = (n < 0) ? 1 : 0;
 	tens = ft_tensnum(n);
-	if (!(res = (char*)malloc(sizeof(char) * (tens + minus + 1))))
+	if (!(res = (char *)malloc(sizeof(char) * (tens + minus + 1))))
 		return (NULL);
 	if (minus)
 		res[i++] = '-';

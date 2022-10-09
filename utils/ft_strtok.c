@@ -55,7 +55,7 @@ static int	count_parts(char *s, char *delim)
 	return (parts);
 }
 
-char		*add_token(char **s, char *delim)
+char	*add_token(char **s, char *delim)
 {
 	char	*tok;
 	int		chars;
@@ -63,11 +63,13 @@ char		*add_token(char **s, char *delim)
 
 	tok = NULL;
 	j = 0;
-	if (!(chars = count_chars(*s, delim)))
+	chars = count_chars(*s, delim);
+	if (!chars)
 		(*s)++;
 	else
 	{
-		if (!(tok = (char*)malloc(sizeof(char) * (chars + 1))))
+		tok = (char *)malloc(sizeof(char) * (chars + 1));
+		if (!tok)
 			return (NULL);
 		while (**s && j < chars)
 		{
@@ -80,7 +82,7 @@ char		*add_token(char **s, char *delim)
 	return (tok);
 }
 
-char		**ft_strtok(char *s, char *delim)
+char	**ft_strtok(char *s, char *delim)
 {
 	char	**tok;
 	int		parts;
@@ -92,14 +94,16 @@ char		**ft_strtok(char *s, char *delim)
 	parts = count_parts(s, delim);
 	if (parts > ft_strlen(s))
 		return (NULL);
-	if (!(tok = (char**)malloc(sizeof(char*) * (parts + 1))))
+	tok = (char **)malloc(sizeof(char *) * (parts + 1));
+	if (!tok)
 		return (NULL);
 	i = 0;
 	while (i < parts)
 	{
 		if (s)
 		{
-			if ((tok[i] = add_token(&s, delim)))
+			tok[i] = add_token(&s, delim);
+			if (tok)
 				i++;
 		}
 		if (!*s)
